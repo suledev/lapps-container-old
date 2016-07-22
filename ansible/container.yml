@@ -1,8 +1,8 @@
 version: "1"
 services:
   galaxy-lappsgrid:
-    image: bgruening/galaxy-stable
-    working_dir: 'galaxy-central'
+    image: bgruening/galaxy-stable:latest
+    working_dir: '/galaxy-central'
     command: ['/usr/bin/startup']
     volumes:
       - /export/
