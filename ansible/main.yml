@@ -1,4 +1,6 @@
 - hosts: galaxy-lappsgrid
   tasks:
+    - name: Install linux packages
+      raw: apt-get update && apt-get install -y bash emacs24-nox git
     - name: Setup Index page
       copy: src="./files/galaxy-lappsgrid/index.html" dest="/galaxy-central/index.html"
