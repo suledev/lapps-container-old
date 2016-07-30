@@ -4,3 +4,7 @@
       raw: apt-get update && apt-get install -y bash emacs24-nox git
     - name: Setup Index page
       copy: src="./files/galaxy-lappsgrid/index.html" dest="/galaxy-central/index.html"
+    - name: Add tools
+      copy: src="./files/galaxy-lappsgrid/tools" dest="/galaxy-central/tools"
+    - name: Add Index
+      copy: src="./files/galaxy-lappsgrid/index.html" dest="/galaxy-central/index.html"
