@@ -7,4 +7,6 @@
     - name: Add tools
       copy: src="./files/galaxy-lappsgrid/tools" dest="/galaxy-central/tools"
     - name: Add Index
-      copy: src="./files/galaxy-lappsgrid/index.html" dest="/galaxy-central/index.html"
+      get_url:
+        url: "https://raw.githubusercontent.com/lappsgrid-incubator/docker-galaxy-lappsgrid/master/index.html"
+        dest: "/galaxy-central/index.html"
