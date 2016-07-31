@@ -18,3 +18,10 @@
       get_url: url=https://raw.githubusercontent.com/lappsgrid-incubator/docker-galaxy-lappsgrid/master/tool_sheds_conf.xml dest=/galaxy-central/tool_shed_conf.xml
     - name: Add startup.sh
       get_url: url=https://raw.githubusercontent.com/lappsgrid-incubator/docker-galaxy-lappsgrid/master/startup.sh dest=/galaxy-central/startup.sh
+
+- hosts: vassar
+  tasks:
+    - name: Get SET_ENV script
+      get_url: url=https://raw.githubusercontent.com/lappsgrid-incubator/docker-vassar/master/setenv.sh dest=/usr/share/tomcat7/bin/setenv.sh
+    - name: Get Shutdown script
+      get_url: url=https://raw.githubusercontent.com/lappsgrid-incubator/docker-vassar/master/shutdown.sh dest=/usr/bin/shutdown
