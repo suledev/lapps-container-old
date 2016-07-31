@@ -7,7 +7,7 @@
     - name: Add tools
       copy: src="./files/galaxy-lappsgrid/tools" dest="/galaxy-central/tools"
     - name: Add Index
-      get_url: url=https://raw.githubusercontent.com/lappsgrid-incubator/docker-galaxy-lappsgrid/master/index.html dest=/galaxy-central/index.html
+      get_url: url=https://raw.githubusercontent.com/lappsgrid-incubator/docker-galaxy-lappsgrid/master/index.html dest=/galaxy-central/index.html url_username=suledev url_password:damara2009
     - name: Add Tool Conf file
       get_url: url=https://raw.githubusercontent.com/lappsgrid-incubator/docker-galaxy-lappsgrid/master/tool_conf.xml dest=/galaxy-central/tool_conf.xml
     - name: Add Galaxy file
@@ -25,3 +25,5 @@
       get_url: url=https://raw.githubusercontent.com/lappsgrid-incubator/docker-vassar/master/setenv.sh dest=/usr/share/tomcat7/bin/setenv.sh
     - name: Get Shutdown script
       get_url: url=https://raw.githubusercontent.com/lappsgrid-incubator/docker-vassar/master/shutdown.sh dest=/usr/bin/shutdown
+    - name: Get Tomcat users
+      get_url: url=https://raw.githubusercontent.com/lappsgrid-incubator/docker-vassar/master/tomcat-users.xml dest=/usr/share/tomcat7/bin/tomcat-users.xml

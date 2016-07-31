@@ -20,6 +20,51 @@ services:
     user: 'root'
     command: ["/usr/bin/startup"]
 
+  oaqa:
+    image: lappsgrid/tomcat7
+    user: 'root'
+    command: ["/usr/bin/startup"]
+
+  ubuntu:
+    image: ubuntu:14.04
+
+  lapps-ubuntu:
+    image: lappsgrid/ubuntu
+
+    
+  brandeis:
+    image: lappsgrid/tomcat7
+    user: 'root'
+    command: ["/usr/bin/startup"]
+
+  gigaworld:
+    image: lappsgrid/gigaworld
+    user: 'root'
+
+  masc:
+    image: lappsgrid/tomcat7:1.0.0
+    user: 'root'
+    command: ["/usr/bin/startup"]
+
+  service-manager:
+    image: lappsgrid/ubuntu
+    user: 'root'
+    command: [ "/usr/bin/startup" ]
+
+  service-manager-vassar:
+    image: lappsgrid/service-manager
+    user: 'root'
+    command: [ "/usr/bin/startup" ]
+
+  service-manager-full:
+    image: lappsgrid/service-manager:vassar
+    working_dir: 'etc/lddl'
+
+  service-manager-brandeis:
+    image: ksuderman/service-manager:base
+    user: 'root'
+    command: [ "/usr/bin/startup" ]
+
 registries: {}
   # Add optional registries used for deployment. For example:
   #  google:
