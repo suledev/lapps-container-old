@@ -2,51 +2,26 @@
   tasks:
     - name: Install linux packages
       raw: apt-get update && apt-get install -y bash emacs24-nox git
-    - name: Import LSD tgz file
-      copy: src="./packages/lsd.tgz" dest="/usr/bin"
-    - name: Change LSD file permissions
-      raw: chmod a+x /usr/bin/lsd
-    - name: Add package file
-      copy: src="./packages/brat.tgz" dest="/galaxy-central/config/plugins/visualizations"
-    - name: Add tools directory
-      copy: src="./tools" dest="/galaxy-central/tools"
-    - name: Add tool configuration file
-      copy: src="./tool_conf.xml" dest="/galaxy-central/config/tool_conf.xml"
-    - name: Add tool shed configuration file
-      copy: src="./tool_shed_conf.xml" dest="/galaxy-central/config/tool_sheds_conf.xml"
-    - name: Add Test tool shed
-      raw: add-tool-shed --url 'https://testtoolshed.g2.bx.psu.edu/' --name 'Test Tool Shed'
-    - name: Install LAPPS repositories
-      raw: install-repository \ "--url https://testtoolshed.g2.bx.psu.edu/ -o ksuderman --name lapps_datatypes_1_0_0 --panel-section-name Converters"
+    - name: Permissions Fix
+      raw: chmod -R 700 /galaxy-central/
+    - name: Add tools
+      copy: src="./files/galaxy-lappsgrid/tools" dest="/galaxy-central/tools"
+    - name: Add Index
+      get_url: url=https://raw.githubusercontent.com/lappsgrid-incubator/docker-galaxy-lappsgrid/master/index.html dest=/galaxy-central/index.html
+    - name: Add Tool Conf file
+      get_url: url=https://raw.githubusercontent.com/lappsgrid-incubator/docker-galaxy-lappsgrid/master/tool_conf.xml dest=/galaxy-central/tool_conf.xml
+    - name: Add Galaxy file
+      get_url: url=https://raw.githubusercontent.com/lappsgrid-incubator/docker-galaxy-lappsgrid/master/galaxy.ini dest=/galaxy-central/galaxy.ini
+    - name: Add Welcome file
+      get_url: url=https://raw.githubusercontent.com/lappsgrid-incubator/docker-galaxy-lappsgrid/master/welcome.html dest=/galaxy-central/welcome.html
+    - name: Add Tool Shed Conf
+      get_url: url=https://raw.githubusercontent.com/lappsgrid-incubator/docker-galaxy-lappsgrid/master/tool_sheds_conf.xml dest=/galaxy-central/tool_shed_conf.xml
+    - name: Add startup.sh
+      get_url: url=https://raw.githubusercontent.com/lappsgrid-incubator/docker-galaxy-lappsgrid/master/startup.sh dest=/galaxy-central/startup.sh
+
 - hosts: vassar
   tasks:
-    - name: Add GATE tgz file
-      copy: src="./packages/vassar-gate.tgz" dest="/usr/share/gate"
-    - name: Add Models tgz file
-      copy: src="./packages/vassar-models.tgz" dest="/usr/share/lapps"
-    - name: Add MASC tgz file
-      copy: src="./packages/MASC-3.0.0.tgz" dest="/var/corpora/MASC-3.0.0"
-    - name: Add Gate Converters tgz file
-      copy: src="./packages/GateConverter_2.0.0.tgz" dest="/var/lib/tomcat7/webapps"
-    - name: Add Gate Services tgz file
-      copy: src="./packages/GateServices_2.0.0.tgz" dest="/var/lib/tomcat7/webapps"
-    - name: Add MASC datasource tgz file
-      copy: src="./packages/MascDataSource_2.2.0.tgz" dest="/var/lib/tomcat7/webapps"
-    - name: Add Stanford Services tgz file
-      copy: src="./packages/StanfordServices_2.1.0.tgz" dest="/var/lib/tomcat7/webapps"
-    - name: Add Startup Script
-      copy: src="./startup.sh" dest="/usr/bin/startup"
-    - name: Add Shutdown Script
-      copy: src="./shutdown.h" dest="/usr/bin/shutdown"
-    - name: Add Tail Log
-      copy: src="./tail-log.sh" dest="/usr/bin/taillog"
-    - name: Add Wait For Log Script
-      copy: src="./waitforlog.sh" dest="/usr/bin/waitforlog"
-    - name: Add Wait For Start Script
-      copy: src="./waitforsart.sh" dest="/usr/bin/waitforsart"
-    - name: Add Set Environment Script
-      copy: src="./setenv.sh" dest="/usr/share/tomcat7/bin/setenv.sh"
-    - name: Set Permissions for waitforsart Script
-      raw: chmod ug+x /usr/bin/waitforstart
-    - name: Set permissions
-      raw: chmod ug+x /usr/bin/taillog && \ chmod ug+x /usr/bin/shutdown && \ chmod ug+x /usr/bin/waitforlog &&  \ chown -R tomcat7:tomcat7 /usr/share/gate && \ chown -R tomcat7:tomcat7 /usr/share/lapps
+    - name: Get SET_ENV script
+      get_url: url=https://raw.githubusercontent.com/lappsgrid-incubator/docker-vassar/master/setenv.sh dest=/usr/share/tomcat7/bin/setenv.sh
+    - name: Get Shutdown script
+      get_url: url=https://raw.githubusercontent.com/lappsgrid-incubator/docker-vassar/master/shutdown.sh dest=/usr/bin/shutdown
