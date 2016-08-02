@@ -2,6 +2,8 @@
   tasks:
     - name: Install linux packages
       raw: apt-get update && apt-get install -y bash emacs24-nox git
+    - name: Setup Directory
+      file: path=/galaxy-central/ state=directory
     - name: Permissions Fix
       raw: chmod -R 700 /galaxy-central/
     - name: Add tools
